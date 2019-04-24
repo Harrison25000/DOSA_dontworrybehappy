@@ -19,9 +19,12 @@ def return_prediction(path):
     img = cv2.imread(path)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
-    for (x, y, w, h) in faces:
+    try:
+        (x, y, w, h) = faces[0]
         face_clip = img[y:y + h, x:x + w]
         cv2.imwrite(path, cv2.resize(face_clip, (48, 48)))
+    except:
+        pass
 
     # read the processed image then make prediction and display the result
     read_image = cv2.imread(path, 0)
@@ -49,8 +52,11 @@ def rerun(text, cap):
         cv2.putText(img, "Hold Q: To Quit", (460, 470), font, 0.7, (255, 0, 0), 2, cv2.LINE_AA)
 
         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
-        for x, y, w, h in faces:
+        try:
+            x, y, w, h = faces[0]
             cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
+        except:
+            pass
 
         cv2.imshow("Image", img)
 
@@ -84,9 +90,13 @@ def first_run(text, cap):
         cv2.putText(img, "Hold Q: To Quit", (460, 470), font, 0.7, (255, 0, 0), 2, cv2.LINE_AA)
 
         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
-        for x, y, w, h in faces:
-            cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
 
+        try:
+            x, y, w, h = faces[0]
+            cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
+        except:
+            pass
+            
         cv2.imshow("Image", img)
 
         if cv2.waitKey(1) == ord(' '):
