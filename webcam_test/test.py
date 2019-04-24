@@ -25,13 +25,16 @@ def return_prediction(path):
 
     # read the processed image then make prediction and display the result
     read_image = cv2.imread(path, 0)
-    read_image = np.asarray(read_image).reshape(1,48,48,1)
-    read_image_final = read_image / 255.0
-    # VGG_Pred = model_VGG.predict(read_image_final)
-    # VGG_Pred = VGG_Pred.reshape(1, VGG_Pred.shape[1] * VGG_Pred.shape[2] * VGG_Pred.shape[3])
-    top_pred = model_top.predict(read_image_final)
-    emotion_label = top_pred[0].argmax() + 1
-    return EMOTION_DICT[emotion_label]
+    try:
+        read_image = np.asarray(read_image).reshape(1,48,48,1)
+        read_image_final = read_image / 255.0
+        # VGG_Pred = model_VGG.predict(read_image_final)
+        # VGG_Pred = VGG_Pred.reshape(1, VGG_Pred.shape[1] * VGG_Pred.shape[2] * VGG_Pred.shape[3])
+        top_pred = model_top.predict(read_image_final)
+        emotion_label = top_pred[0].argmax() + 1
+        return EMOTION_DICT[emotion_label]
+    except:
+        pass
 
 
 def rerun(text, cap):
