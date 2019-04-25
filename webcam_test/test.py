@@ -45,16 +45,16 @@ def rerun(text, cap):
         ret, img = cap.read()
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         font = cv2.FONT_HERSHEY_SIMPLEX
-        cv2.putText(img, "Last Emotion was " + str(text), (95, 30), font, 1.0, (255, 0, 0), 2, cv2.LINE_AA)
+        cv2.putText(img, "Last Emotion was " + str(text), (95, 30), font, 1.0, (0, 0, 255), 2, cv2.LINE_AA)
 
-        cv2.putText(img, "Press SPACE: FOR EMOTION", (5, 470), font, 0.7, (255, 0, 0), 2, cv2.LINE_AA)
+        cv2.putText(img, "Press SPACE: FOR EMOTION", (5, 470), font, 0.7, (0, 0, 255), 2, cv2.LINE_AA)
 
-        cv2.putText(img, "Hold Q: To Quit", (460, 470), font, 0.7, (255, 0, 0), 2, cv2.LINE_AA)
+        cv2.putText(img, "Hold Q: To Quit", (460, 470), font, 0.7, (0, 0, 255), 2, cv2.LINE_AA)
 
         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
         try:
             x, y, w, h = faces[0]
-            cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
+            cv2.rectangle(img, (x, y), (x + w, y + h), (0,255,0), 2)
         except:
             pass
 
@@ -83,20 +83,20 @@ def first_run(text, cap):
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         font = cv2.FONT_HERSHEY_SIMPLEX
-        cv2.putText(img, "Last Emotion was " + str(text), (95, 30), font, 1.0, (255, 0, 0), 2, cv2.LINE_AA)
+        cv2.putText(img, "Last Emotion was " + str(text), (95, 30), font, 1.0, (0,0,255), 2, cv2.LINE_AA)
 
-        cv2.putText(img, "Press SPACE: FOR EMOTION", (5, 470), font, 0.7, (255, 0, 0), 2, cv2.LINE_AA)
+        cv2.putText(img, "Press SPACE: FOR EMOTION", (5, 470), font, 0.7, (0,0,255), 2, cv2.LINE_AA)
 
-        cv2.putText(img, "Hold Q: To Quit", (460, 470), font, 0.7, (255, 0, 0), 2, cv2.LINE_AA)
+        cv2.putText(img, "Hold Q: To Quit", (460, 470), font, 0.7, (0,0,255), 2, cv2.LINE_AA)
 
         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
 
         try:
             x, y, w, h = faces[0]
-            cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
+            cv2.rectangle(img, (x, y), (x + w, y + h), (0,255,0), 2)
         except:
             pass
-            
+
         cv2.imshow("Image", img)
 
         if cv2.waitKey(1) == ord(' '):
