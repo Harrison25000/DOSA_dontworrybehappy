@@ -1,4 +1,4 @@
-# Team DOSA: MAKERS FINAL PROJECT
+# Team SODA: MAKERS FINAL PROJECT
 
 ## Machine Learning Group: Facial Expression Recognition
 
