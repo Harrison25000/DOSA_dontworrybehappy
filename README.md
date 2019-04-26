@@ -1,5 +1,10 @@
 # Team SODA: MAKERS FINAL PROJECT
 
+***
+## *"Don't Worry, Be Happy!"*
+
+***
+
 ## Machine Learning Group: Facial Expression Recognition
 
 **Project Objective:** This will mainly be a learning project, as Machine Learning is an area that is new to us. Nevertheless, we have an “MVP” to aim for, that will serve as a demonstration of our learning.
