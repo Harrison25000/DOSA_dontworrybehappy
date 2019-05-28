@@ -46,6 +46,7 @@ def rerun(text, cap):
         ret, img = cap.read()
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         font = cv2.FONT_HERSHEY_SIMPLEX
+<<<<<<< HEAD
         emotion = cv2.putText(img, "Last Emotion was " + str(text), (95, 30), font, 1.0, (0, 0, 255), 2, cv2.LINE_AA)
 
         try:
@@ -82,12 +83,16 @@ def rerun(text, cap):
             except:
                 pass
 
+=======
+        cv2.putText(img, "Last Emotion was " + str(text), (95, 30), font, 1.0, (0, 0, 255), 2, cv2.LINE_AA)
+>>>>>>> c5e37be246a78f289d68babd97c2e12506d170a4
 
-        cv2.putText(img, "Press SPACE: FOR EMOTION", (5, 470), font, 0.7, (255, 0, 0), 2, cv2.LINE_AA)
+        cv2.putText(img, "Press SPACE: FOR EMOTION", (5, 470), font, 0.7, (0, 0, 255), 2, cv2.LINE_AA)
 
-        cv2.putText(img, "Hold Q: To Quit", (460, 470), font, 0.7, (255, 0, 0), 2, cv2.LINE_AA)
+        cv2.putText(img, "Hold Q: To Quit", (460, 470), font, 0.7, (0, 0, 255), 2, cv2.LINE_AA)
 
         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+<<<<<<< HEAD
 
         cv2.imshow("Image", img)
 
@@ -112,6 +117,13 @@ def rerun(text, cap):
         #     cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
         # except:
         #     pass
+=======
+        try:
+            x, y, w, h = faces[0]
+            cv2.rectangle(img, (x, y), (x + w, y + h), (0,255,0), 2)
+        except:
+            pass
+>>>>>>> c5e37be246a78f289d68babd97c2e12506d170a4
 
         cv2.imshow("Image", img)
 
@@ -138,6 +150,7 @@ def first_run(text, cap):
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         font = cv2.FONT_HERSHEY_SIMPLEX
+<<<<<<< HEAD
         emotion = cv2.putText(img, "Last Emotion was " + str(text), (95, 30), font, 1.0, (0, 0, 255), 2, cv2.LINE_AA)
 
         try:
@@ -174,18 +187,29 @@ def first_run(text, cap):
             except:
                 pass
 
+=======
+        cv2.putText(img, "Last Emotion was " + str(text), (95, 30), font, 1.0, (0,0,255), 2, cv2.LINE_AA)
+>>>>>>> c5e37be246a78f289d68babd97c2e12506d170a4
 
-        cv2.putText(img, "Press SPACE: FOR EMOTION", (5, 470), font, 0.7, (255, 0, 0), 2, cv2.LINE_AA)
+        cv2.putText(img, "Press SPACE: FOR EMOTION", (5, 470), font, 0.7, (0,0,255), 2, cv2.LINE_AA)
 
-        cv2.putText(img, "Hold Q: To Quit", (460, 470), font, 0.7, (255, 0, 0), 2, cv2.LINE_AA)
+        cv2.putText(img, "Hold Q: To Quit", (460, 470), font, 0.7, (0,0,255), 2, cv2.LINE_AA)
 
         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
 
+<<<<<<< HEAD
         # try:
         #     x, y, w, h = faces[0]
         #     cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
         # except:
         #     pass
+=======
+        try:
+            x, y, w, h = faces[0]
+            cv2.rectangle(img, (x, y), (x + w, y + h), (0,255,0), 2)
+        except:
+            pass
+>>>>>>> c5e37be246a78f289d68babd97c2e12506d170a4
 
         cv2.imshow("Image", img)
 
