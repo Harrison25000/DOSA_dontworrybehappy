@@ -4,8 +4,8 @@ import cv2
 import numpy as np
 import sys
 
-model_top = load_model("my_model.h5")
-EMOTION_DICT = {1:"ANGRY", 2:"FEAR", 3:"HAPPY", 4:"NEUTRAL", 5:"SAD", 6:"SURPRISE"}
+model_top = load_model("my_model - Copy.h5")
+EMOTION_DICT = {0:"ANGRY", 1:"HAPPY", 2:"SAD", 3:"SURPRISE"}
 
 def return_prediction(path):
     # converting image to gray scale and save it
@@ -34,7 +34,8 @@ def return_prediction(path):
         # VGG_Pred = model_VGG.predict(read_image_final)
         # VGG_Pred = VGG_Pred.reshape(1, VGG_Pred.shape[1] * VGG_Pred.shape[2] * VGG_Pred.shape[3])
         top_pred = model_top.predict(read_image_final)
-        emotion_label = top_pred[0].argmax() + 1
+        print(top_pred)
+        emotion_label = top_pred[0].argmax()
         return EMOTION_DICT[emotion_label]
     except:
         pass
@@ -45,18 +46,72 @@ def rerun(text, cap):
         ret, img = cap.read()
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         font = cv2.FONT_HERSHEY_SIMPLEX
-        cv2.putText(img, "Last Emotion was " + str(text), (95, 30), font, 1.0, (255, 0, 0), 2, cv2.LINE_AA)
+        emotion = cv2.putText(img, "Last Emotion was " + str(text), (95, 30), font, 1.0, (0, 0, 255), 2, cv2.LINE_AA)
+
+        try:
+            x, y, w, h = faces[0]
+            cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
+        except:
+            pass
+
+        if str(text) == "HAPPY":
+            try:
+                x, y, w, h = faces[0]
+                cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 255), 2)
+            except:
+                pass
+
+        if str(text) == "SAD":
+            try:
+                x, y, w, h = faces[0]
+                cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
+            except:
+                pass
+
+        if str(text) == "ANGRY":
+            try:
+                x, y, w, h = faces[0]
+                cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
+            except:
+                pass
+
+        if str(text) == "SURPRISE":
+            try:
+                x, y, w, h = faces[0]
+                cv2.rectangle(img, (x, y), (x + w, y + h), (255, 192, 203), 2)
+            except:
+                pass
+
 
         cv2.putText(img, "Press SPACE: FOR EMOTION", (5, 470), font, 0.7, (255, 0, 0), 2, cv2.LINE_AA)
 
         cv2.putText(img, "Hold Q: To Quit", (460, 470), font, 0.7, (255, 0, 0), 2, cv2.LINE_AA)
 
         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
-        try:
-            x, y, w, h = faces[0]
-            cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
-        except:
-            pass
+
+        cv2.imshow("Image", img)
+
+        if cv2.waitKey(1) == ord(' '):
+            cv2.imwrite("test.jpg", img)
+            text = return_prediction("test.jpg")
+            rerun(text, cap)
+            break
+
+        if cv2.waitKey(1) == ord('q'):
+            cap.release()
+            cv2.destroyAllWindows()
+            break
+
+        cv2.putText(img, "Press SPACE: FOR EMOTION", (5, 470), font, 0.7, (255, 0, 0), 2, cv2.LINE_AA)
+
+        cv2.putText(img, "Hold Q: To Quit", (460, 470), font, 0.7, (255, 0, 0), 2, cv2.LINE_AA)
+
+        faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+        # try:
+        #     x, y, w, h = faces[0]
+        #     cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
+        # except:
+        #     pass
 
         cv2.imshow("Image", img)
 
@@ -83,7 +138,42 @@ def first_run(text, cap):
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         font = cv2.FONT_HERSHEY_SIMPLEX
-        cv2.putText(img, "Last Emotion was " + str(text), (95, 30), font, 1.0, (255, 0, 0), 2, cv2.LINE_AA)
+        emotion = cv2.putText(img, "Last Emotion was " + str(text), (95, 30), font, 1.0, (0, 0, 255), 2, cv2.LINE_AA)
+
+        try:
+            x, y, w, h = faces[0]
+            cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
+        except:
+            pass
+
+        if str(text) == "HAPPY":
+            try:
+                x, y, w, h = faces[0]
+                cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 255), 2)
+            except:
+                pass
+
+        if str(text) == "SAD":
+            try:
+                x, y, w, h = faces[0]
+                cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
+            except:
+                pass
+
+        if str(text) == "ANGRY":
+            try:
+                x, y, w, h = faces[0]
+                cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
+            except:
+                pass
+
+        if str(text) == "SURPRISE":
+            try:
+                x, y, w, h = faces[0]
+                cv2.rectangle(img, (x, y), (x + w, y + h), (255, 192, 203), 2)
+            except:
+                pass
+
 
         cv2.putText(img, "Press SPACE: FOR EMOTION", (5, 470), font, 0.7, (255, 0, 0), 2, cv2.LINE_AA)
 
@@ -91,12 +181,12 @@ def first_run(text, cap):
 
         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
 
-        try:
-            x, y, w, h = faces[0]
-            cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
-        except:
-            pass
-            
+        # try:
+        #     x, y, w, h = faces[0]
+        #     cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
+        # except:
+        #     pass
+
         cv2.imshow("Image", img)
 
         if cv2.waitKey(1) == ord(' '):
